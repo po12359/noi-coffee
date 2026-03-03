@@ -1,0 +1,483 @@
+@charset "UTF-8";
+
+/* スマホ用共通ＣＳＳ */
+
+.pc_only{ display: none; }
+
+/* iPHONEのフォントサイズを調整 */
+body { -webkit-text-size-adjust: 100%; }
+/*--------------------------------------------------
+**************************************************
+ヘッダー
+**************************************************
+--------------------------------------------------*/
+
+body {
+  position: relative;
+  width: 100%;
+  height: auto;
+  font-family: Avenir Mefium;
+  background: #000;
+  margin: unset;
+}
+
+header{
+  position: fixed;
+  width: 100%;
+  height: 50px;
+  top: 0;
+  background: #000000bd;
+  z-index: 15;
+}
+
+header #header_common{
+  position: relative;
+  width:100%;
+  height: 50px;
+}
+
+header #header_common .logo {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+}
+
+header #header_common #logo{
+  display: block;
+  float: left;
+  padding: 5px;
+}
+
+svg#logo01 {
+  width: 30px;
+  height: 30px;
+  fill: #f6c8DD;
+  padding: 5px;
+}
+
+nav#header_top_nav {
+  position: absolute;
+  display: inline-block;
+  width: 100%;
+  top: 0;
+  bottom: 0;
+  left: :0;
+  right: 0;
+  margin: 0 auto;
+}
+
+header #header_common nav#header_top_nav #hamburger_icon.icon_box{
+  position: relative;
+  float: right;
+  width: 50px;
+  height: 50px;
+  margin: auto;
+}
+
+ul.top_nav_ul_sp{
+  position: absolute;
+  top: 46px;
+  display: none;
+  width: 100%;
+  padding: 10px 0;
+  color: #000;
+  background: #f6c8DD;
+  z-index: 99999;
+}
+
+ul.top_nav_ul_sp > li{
+  position: relative;
+  border-bottom: 1px dashed #928e8e;
+}
+
+ul.top_nav_ul_sp > li .plus_icon.sub_open:before{
+  background: none;
+}
+
+ul.top_nav_ul_sp > li:last-child{
+  border-bottom: none;
+}
+
+ul.top_nav_ul_sp > li > a{
+  display: block;
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  padding-left: 20px;
+  color: #333;
+  box-sizing: border-box;
+}
+
+ul.top_nav_ul_sp > li > ul.sub_navi{
+  display: none;
+}
+
+ul.top_nav_ul_sp > li > ul.sub_navi > li{
+  background: #34b13da6;
+  border-bottom: 1px solid #fff;
+}
+
+ul.top_nav_ul_sp > li > ul.sub_navi > li:last-child{
+  border-bottom: none;
+}
+
+ul.top_nav_ul_sp > li > ul.sub_navi > li >a{
+  display: block;
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  padding-left: 20px;
+  color: #fff;
+  box-sizing: border-box;
+}
+
+/* ハンバーガーアイコン */
+
+.icon-animation {
+  width: 26px;
+  height: 40px;
+  float: right;
+  display: block;
+  position: relative;
+}
+
+.icon-animation span {
+  position: absolute;
+  display: block;
+  width: 24px;
+  height: 2px;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  margin: auto;
+  background: #f6c8DD;
+}
+
+#hamburger_icon span {
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  -webkit-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  transform: rotate(0deg);
+}
+
+#hamburger_icon .top {
+  -webkit-transform: translateY(-8px);
+  -ms-transform: translateY(-8px);
+  transform: translateY(-8px);
+}
+
+#hamburger_icon .bottom {
+  -webkit-transform: translateY(8px);
+  -ms-transform: translateY(8px);
+  transform: translateY(8px);
+}
+
+#hamburger_icon.is-open .middle {
+  background: rgba(255, 255, 255, 0);
+}
+
+#hamburger_icon.is-open .top {
+  -webkit-transform: rotate(-45deg) translateY(0px);
+  -ms-transform: rotate(-45deg) translateY(0px);
+  transform: rotate(-45deg) translateY(0px);
+}
+
+#hamburger_icon.is-open .bottom {
+  -webkit-transform: rotate(45deg) translateY(0px);
+  -ms-transform: rotate(45deg) translateY(0px);
+  transform: rotate(45deg) translateY(0px);
+}
+
+nav#header_sns_nav {
+  position: absolute;
+  display: flex;
+  width: calc(100% - 100px);
+  height: 40px;
+  top: 0px;
+  right: 50px;
+  bottom: 0;
+  margin: auto 0;
+}
+
+nav#header_sns_nav ul {
+  display: flex;
+  width: 110px;
+  height: 40px;
+  list-style: none;
+  margin: auto 10px auto auto;
+}
+
+nav#header_sns_nav li {
+  width: 20px;
+  height: 20px;
+  margin: auto;
+  padding-left: 10px;
+}
+
+nav#header_sns_nav li:nth-child(1) {
+  margin-left: unset;
+}
+
+nav#header_sns_nav li svg {
+  fill: #f6c8DD;
+}
+
+nav#header_sns_nav li a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transition: 0.3s;
+}
+
+nav#header_sns_nav li a:hover {
+  background: #f20873a6;
+}
+
+/* 管理メニューを下部に固定表示 */
+#wpadminbar{
+  top: auto!important;
+  bottom: 0px;
+}
+
+/*--------------------------------------------------
+**************************************************
+フッター
+**************************************************
+--------------------------------------------------*/
+
+footer {
+  display: block;
+  width: 100%;
+  height: 40px;
+  bottom: 0;
+  background: #f6c8DD;
+}
+
+div#footer_content {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: calc(100% - 20px);
+  height: 40px;
+  margin: 0 auto;
+}
+
+div#footer_wrap {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 40px;
+  margin: 0 auto;
+}
+
+div#footer_content div#footer_wrap .logo {
+  display: inline-block;
+  width: 50px;
+}
+
+div#footer_content div#footer_wrap #logo{
+  display: block;
+  padding: 5px;
+}
+
+div#footer_content div#footer_wrap #logo svg#logo1 {
+  width: 30px;
+  height: 30px;
+  fill: #000;
+  padding: 5px;
+}
+
+div#footer_wrap .logo svg#logo1:hover{
+  Fill:#ec77adfc;
+}
+
+div#footer_wrap .nav_wrap {
+  width: calc(100% - 140px);
+  height: 40px;
+}
+
+div#footer_wrap .nav_wrap ul {
+  display: flex;
+  width: 100%;
+  max-width: 180px;
+  height: 40px;
+  list-style: none;
+  margin: 0 auto;
+  text-align: center;
+}
+
+div#footer_wrap .nav_wrap ul li {
+  margin: auto;
+}
+
+div#footer_wrap .nav_wrap ul li a {
+  display: block;
+  text-decoration: none;
+  font-size: 10px;
+  color: #000;
+  transition: 0.3s;
+}
+
+div#footer_wrap .nav_wrap ul li a:hover {
+
+
+}
+
+div#footer_wrap .nav_wrap ul li a:hover::after {
+  transform: scale(1, 1);
+}
+div#footer_wrap .nav_wrap ul li a::after {
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  content: '';
+  width: 100%;
+  height: 1px;
+  background: #ec77adfc;
+  transform: scale(0, 1);
+  transform-origin: left top;
+  transition: transform .3s;
+}
+
+div#footer_wrap .SNS_wrap {
+  display: flex;
+  width: 120px;
+  height: 40px;
+}
+div#footer_wrap .SNS_wrap ul {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  height: 40px;
+  list-style: none;
+}
+
+div#footer_wrap .SNS_wrap li {
+  width: 20px;
+  height: 20px;
+}
+
+div#footer_wrap .SNS_wrap li:nth-child(1) {
+  margin-left: unset;
+}
+
+div#footer_wrap .SNS_wrap li svg {
+  fill: #000;
+  width: 80%;
+}
+
+div#footer_wrap .SNS_wrap li a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transition: 0.3s;
+}
+
+div#footer_wrap .SNS_wrap li a:hover {
+
+}
+
+div#footer_wrap .SNS_wrap li svg:hover{
+  Fill:#ec77adfc;
+}
+
+#pageup {
+  position: fixed;
+  bottom: 25px;
+  right: 10px;
+  z-index: 10000;
+}
+
+#pageup a {
+  display: block;
+  width: 60px;
+  height: 60px;
+  color: #000;
+  font-size: 10px;
+  background: #f6c8DD;
+  border-radius: 50%;
+  transition: 0.3s;
+}
+
+#pageup a:hover {
+  opacity: 0.8;
+}
+
+#pageup a span.page_top {
+  position: absolute;
+  display: block;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  font-weight: 600;
+  text-align: center;
+}
+
+
+
+#pageup a::before {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 10px;
+  height: 10px;
+  top: -30px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  border-bottom: solid 2px #000;
+  border-right: solid 2px #000;
+  transform: rotate(
+    -135deg
+    );
+  }
+
+
+  /*--------------------------------------------------
+  **************************************************
+  パンくず
+  **************************************************
+  --------------------------------------------------*/
+
+  #breadcrumb {
+    width: 100%;
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 0 20px;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    line-height: 18px;
+    box-sizing: border-box;
+  }
+  #breadcrumb a { color: #2E90A4; }
+
+  /*--------------------------------------------------
+  **************************************************
+  ページナビ共通
+  **************************************************
+  --------------------------------------------------*/
+  .wp-pagenavi{
+    margin-bottom: 60px;
+  }
+
+  .wp-pagenavi a, .wp-pagenavi span{
+    padding: 5px 16px!important;
+    border: none!important;
+    color: #fff;
+  }
+
+  .wp-pagenavi a, .wp-pagenavi span.pages{
+    background: #bbb;
+  }
+
+  .wp-pagenavi a{
+    background: #bbb;
+  }
+
+  .wp-pagenavi span.current{
+    background: #6d6d6d;
+  }
