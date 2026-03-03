@@ -27,6 +27,7 @@ async function optimizeImages() {
         const beforeKB = Math.round(beforeStat.size / 1024);
 
         await sharp(inputPath)
+            .rotate()           // EXIF 방향 정보를 자동으로 적용 후 제거
             .webp({ quality: QUALITY })
             .toFile(outputPath);
 
