@@ -1,117 +1,273 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="삿포로의 프리미엄 카페 noi coffee - 정성을 담은 커피와 아늑한 공간">
-    <title>noi coffee | 삿포로 프리미엄 카페</title>
-    <!-- Fonts -->
+    <meta name="description" content="noi coffee（ノアイコーヒー）は札幌・平岸の韓国スタイルコーヒースタンドです。シグネチャークリームラテをどうぞ。">
+    <title>noi coffee | 札幌・平岸 コーヒースタンド</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Serif+JP:wght@200;300;400&family=Outfit:wght@300;400;500&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="./src/style.css">
 </head>
+
 <body>
-    <!-- Header -->
-    <header class="header">
-        <nav class="container nav">
-            <div class="logo">
-                <img src="./public/assets/images/logo.jpg" alt="noi coffee logo" id="nav-logo">
+    <!-- ====== LOADER ====== -->
+    <div class="loader" id="loader">
+        <div class="loader-inner">
+            <img src="./public/assets/images/logo.jpg" alt="noi coffee" class="loader-logo">
+            <div class="loader-bar">
+                <div class="loader-fill"></div>
             </div>
-            <ul class="nav-links">
-                <li><a href="#about">About</a></li>
-                <li><a href="#menu">Menu</a></li>
-                <li><a href="#gallery">Gallery</a></li>
-                <li><a href="#location">Location</a></li>
+        </div>
+    </div>
+
+    <!-- ====== HEADER ====== -->
+    <header class="header" id="header">
+        <div class="header-inner">
+            <a href="#hero" class="header-logo">
+                <img src="./public/assets/images/logo.jpg" alt="noi coffee">
+                <span>noi coffee</span>
+            </a>
+            <nav class="nav" id="nav">
+                <ul>
+                    <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#menu" class="nav-link">Menu</a></li>
+                    <li><a href="#gallery" class="nav-link">Gallery</a></li>
+                    <li><a href="#access" class="nav-link">Access</a></li>
+                </ul>
+            </nav>
+            <button class="nav-toggle" id="nav-toggle" aria-label="メニュー">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+        <!-- Mobile Drawer -->
+        <div class="mobile-drawer" id="mobile-drawer">
+            <ul>
+                <li><a href="#about" class="drawer-link">About</a></li>
+                <li><a href="#menu" class="drawer-link">Menu</a></li>
+                <li><a href="#gallery" class="drawer-link">Gallery</a></li>
+                <li><a href="#access" class="drawer-link">Access</a></li>
+                <li class="drawer-sns">
+                    <a href="https://www.instagram.com/noi.coffee05/" target="_blank" rel="noopener">Instagram →</a>
+                </li>
             </ul>
-            <div class="mobile-menu-btn" id="mobile-toggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </nav>
+        </div>
     </header>
 
     <main>
-        <!-- Hero Section -->
-        <section class="hero" id="home">
-            <div class="hero-bg">
-                <img src="./public/assets/images/hero.jpg" alt="noi coffee interior">
+        <!-- ====== HERO ====== -->
+        <section class="hero" id="hero">
+            <div class="hero-slider" id="hero-slider">
+                <div class="hero-slide active"
+                    style="background-image: url('./public/assets/images/1769165117048.jpg')"></div>
+                <div class="hero-slide" style="background-image: url('./public/assets/images/20260202_100739.jpg')">
+                </div>
+                <div class="hero-slide" style="background-image: url('./public/assets/images/20260212_144506.jpg')">
+                </div>
             </div>
-            <div class="hero-content container">
-                <h1 class="fade-in">Experience the <br>Perfect Brew</h1>
-                <p class="fade-in">삿포로의 고요함 속에서 만나는 단 하나의 커피, noi coffee.</p>
-                <a href="#menu" class="btn fade-in">메뉴 보기</a>
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <p class="hero-sub reveal">SAPPORO · HIRAGISHI</p>
+                <h1 class="hero-title reveal">
+                    <span>小さな休息を、</span>
+                    <span>ここで。</span>
+                </h1>
+                <p class="hero-desc reveal">noi coffee</p>
+                <a href="#about" class="hero-cta reveal">Discover</a>
+            </div>
+            <div class="hero-scroll-hint">
+                <span>Scroll</span>
+                <div class="scroll-line"></div>
+            </div>
+            <div class="hero-dots" id="hero-dots">
+                <button class="hero-dot active" data-index="0"></button>
+                <button class="hero-dot" data-index="1"></button>
+                <button class="hero-dot" data-index="2"></button>
             </div>
         </section>
 
-        <!-- About Section -->
+        <!-- ====== ABOUT ====== -->
         <section class="section about" id="about">
-            <div class="container grid">
-                <div class="about-image fade-in">
-                    <img src="./public/assets/images/about.jpg" alt="Our Story" class="premium-card">
+            <div class="about-grid">
+                <div class="about-images">
+                    <div class="about-img-main reveal">
+                        <img src="./public/assets/images/20260116_122617.jpg" alt="店内の様子">
+                    </div>
+                    <div class="about-img-sub reveal">
+                        <img src="./public/assets/images/20260105_130401.jpg" alt="コーヒー">
+                    </div>
                 </div>
-                <div class="about-text fade-in">
-                    <h2 class="section-title">Our Story</h2>
-                    <p>noi coffee는 삿포로의 계절을 담은 정성을 제공합니다. 엄선된 원두와 숙련된 바리스타의 손길로 완성된 한 잔의 커피는 당신의 일상에 작은 안식을 선사할 것입니다.</p>
+                <div class="about-text">
+                    <p class="section-label reveal">Our Story</p>
+                    <h2 class="section-title reveal">日常に溶け込む<br>ひとときの休息</h2>
+                    <div class="divider reveal"></div>
+                    <p class="about-body reveal">
+                        noi coffee（ノアイコーヒー）は、<br>
+                        札幌・平岸の静かな住宅街に生まれた<br>
+                        韓国スタイルのコーヒースタンドです。
+                    </p>
+                    <p class="about-body reveal">
+                        韓国人バリスタが一杯ずつ丁寧に淹れるコーヒーと、<br>
+                        シグネチャークリームラテで、<br>
+                        あなたの日常にそっと寄り添います。
+                    </p>
+                    <div class="about-badges reveal">
+                        <span>Takeout Only</span>
+                        <span>2026 Open</span>
+                        <span>Hiragishi</span>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Menu Highlight -->
+        <!-- ====== MENU ====== -->
         <section class="section menu" id="menu">
             <div class="container">
-                <h2 class="section-title text-center">Signature Menu</h2>
-                <div class="menu-grid">
-                    <div class="menu-item premium-card fade-in">
-                        <img src="./public/assets/images/menu-1.jpg" alt="Special Coffee">
-                        <div class="menu-info">
-                            <h3>Special Hand Drip</h3>
-                            <p>계절별 엄선된 원두로 내린 핸드드립 커피</p>
-                        </div>
+                <p class="section-label text-center reveal">Signature</p>
+                <h2 class="section-title text-center reveal">Menu</h2>
+                <div class="divider centered reveal"></div>
+                <div class="menu-board-grid">
+                    <div class="menu-board-item reveal">
+                        <img src="./public/assets/images/menu-board.png" alt="noi coffee メニュー">
                     </div>
-                    <!-- 다른 메뉴 아이템들... -->
+                    <div class="menu-board-item reveal">
+                        <img src="./public/assets/images/menu-creamilatte.png" alt="Cream Latte メニュー">
+                    </div>
                 </div>
+                <p class="menu-note reveal">※ 豆は札幌のロースタリーより厳選仕入れのため、ご提供内容が変更となる場合があります。<br>最新情報は<a
+                        href="https://www.instagram.com/noi.coffee05/" target="_blank">Instagram</a>でご確認ください。</p>
             </div>
         </section>
 
-        <!-- Gallery -->
+        <!-- ====== GALLERY ====== -->
         <section class="section gallery" id="gallery">
             <div class="container">
-                <h2 class="section-title text-center">Gallery</h2>
-                <div class="gallery-grid">
-                    <div class="gallery-item fade-in"><img src="./public/assets/images/gallery-1.jpg" alt="Gallery 1" class="premium-card"></div>
-                    <div class="gallery-item fade-in"><img src="./public/assets/images/gallery-2.jpg" alt="Gallery 2" class="premium-card"></div>
-                    <div class="gallery-item fade-in"><img src="./public/assets/images/gallery-3.jpg" alt="Gallery 3" class="premium-card"></div>
-                    <div class="gallery-item fade-in"><img src="./public/assets/images/interior.jpg" alt="Gallery 4" class="premium-card"></div>
+                <p class="section-label text-center reveal">Moments</p>
+                <h2 class="section-title text-center reveal">Gallery</h2>
+                <div class="divider centered reveal"></div>
+            </div>
+            <div class="gallery-masonry">
+                <div class="gallery-item reveal"><img src="./public/assets/images/20260105_130812.jpg" alt=""></div>
+                <div class="gallery-item reveal"><img src="./public/assets/images/20260108_110104.jpg" alt=""></div>
+                <div class="gallery-item reveal"><img src="./public/assets/images/20260114_110418.jpg" alt=""></div>
+                <div class="gallery-item reveal"><img src="./public/assets/images/20260114_132220.jpg" alt=""></div>
+                <div class="gallery-item reveal"><img src="./public/assets/images/20260115_141321.jpg" alt=""></div>
+                <div class="gallery-item reveal"><img src="./public/assets/images/20260116_121508.jpg" alt=""></div>
+                <div class="gallery-item reveal"><img src="./public/assets/images/20260116_121520.jpg" alt=""></div>
+                <div class="gallery-item reveal"><img src="./public/assets/images/20260127_130448.jpg" alt=""></div>
+                <div class="gallery-item reveal"><img src="./public/assets/images/20260204_163743.jpg" alt=""></div>
+                <div class="gallery-item reveal"><img src="./public/assets/images/20260204_164050.jpg" alt=""></div>
+                <div class="gallery-item reveal"><img src="./public/assets/images/20260204_164054.jpg" alt=""></div>
+                <div class="gallery-item reveal"><img src="./public/assets/images/20260302_095625.jpg" alt=""></div>
+                <div class="gallery-item reveal"><img src="./public/assets/images/20260303_092312.jpg" alt=""></div>
+                <div class="gallery-item reveal"><img src="./public/assets/images/IMG20260107170754_01.jpg" alt="">
                 </div>
+                <div class="gallery-item reveal"><img src="./public/assets/images/IMG20260107170819.jpg" alt=""></div>
+                <div class="gallery-item reveal"><img src="./public/assets/images/IMG20260107171927.jpg" alt=""></div>
+            </div>
+            <!-- Lightbox -->
+            <div class="lightbox" id="lightbox">
+                <button class="lightbox-close" id="lightbox-close">✕</button>
+                <button class="lightbox-prev" id="lightbox-prev">&#8249;</button>
+                <button class="lightbox-next" id="lightbox-next">&#8250;</button>
+                <div class="lightbox-img-wrap"><img src="" alt="" id="lightbox-img"></div>
             </div>
         </section>
 
-        <!-- Location -->
-        <section class="section location" id="location">
-            <div class="container">
-                <h2 class="section-title text-center">Find Us</h2>
-                <div class="location-content premium-card fade-in">
-                    <!-- Google Map Placeholder or Info -->
-                    <div class="info">
-                        <h3>Visit noi coffee</h3>
-                        <p>Address: 삿포로시 중앙구 어느 활기찬 거리</p>
-                        <p>Open: 10:00 AM - 08:00 PM</p>
+        <!-- ====== ACCESS ====== -->
+        <section class="section access" id="access">
+            <div class="access-grid">
+                <div class="access-map reveal">
+                    <!-- 지도를 클릭하면 구글맵 경로 안내로 이동 -->
+                    <a class="map-link-overlay"
+                        href="https://www.google.com/maps/dir/?api=1&destination=札幌市豊平区平岸4条1丁目6-10&travelmode=transit"
+                        target="_blank" rel="noopener" title="Google Mapsで経路を確認する">
+                        <div class="map-link-hint">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <circle cx="12" cy="12" r="10" />
+                                <path d="M12 8v4l3 3" />
+                            </svg>
+                            タップして経路を確認
+                        </div>
+                    </a>
+                    <iframe src="https://maps.google.com/maps?q=札幌市豊平区平岸4条1丁目6-10&output=embed&hl=ja&z=16"
+                        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                        title="noi coffee アクセスマップ">
+                    </iframe>
+                </div>
+                <div class="access-info">
+                    <p class="section-label reveal">Find Us</p>
+                    <h2 class="section-title reveal">Access</h2>
+                    <div class="divider reveal"></div>
+                    <dl class="access-details reveal">
+                        <div class="access-row">
+                            <dt>住所</dt>
+                            <dd>〒062-0934<br>札幌市豊平区平岸4条1丁目6-10</dd>
+                        </div>
+                        <div class="access-row">
+                            <dt>アクセス</dt>
+                            <dd>札幌市営地下鉄南北線<br>「豊平公園駅」1・2番出口より徒歩5分</dd>
+                        </div>
+                        <div class="access-row">
+                            <dt>営業時間</dt>
+                            <dd>10:00 〜 17:00（平日）</dd>
+                        </div>
+                        <div class="access-row">
+                            <dt>定休日</dt>
+                            <dd>土曜・日曜・祝日<br><small>※ 店舗の都合により臨時休業となる場合がございます。<br>最新情報は<a
+                                        href="https://www.instagram.com/noi.coffee05/" target="_blank" rel="noopener"
+                                        style="color:var(--c-gold)">Instagram</a>をご確認ください。</small></dd>
+                        </div>
+                        <div class="access-row">
+                            <dt>サービス</dt>
+                            <dd>テイクアウトのみ</dd>
+                        </div>
+                    </dl>
+                    <div class="access-sns reveal">
+                        <a href="https://www.instagram.com/noi.coffee05/" target="_blank" rel="noopener"
+                            class="sns-btn">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                                <circle cx="12" cy="12" r="4" />
+                                <circle cx="17.5" cy="6.5" r="0.75" fill="currentColor" stroke="none" />
+                            </svg>
+                            @noi.coffee05
+                        </a>
+                        <a href="https://tabelog.com/hokkaido/A0101/A010303/1083597/" target="_blank" rel="noopener"
+                            class="sns-btn">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                                <path d="M2 17l10 5 10-5" />
+                                <path d="M2 12l10 5 10-5" />
+                            </svg>
+                            Tabelog
+                        </a>
                     </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- Footer -->
+    <!-- ====== FOOTER ====== -->
     <footer class="footer">
-        <div class="container">
-            <p>&copy; 2024 noi coffee All Rights Reserved.</p>
-            <div class="social-links">
-                <a href="#">Instagram</a>
-                <a href="#">Tabelog</a>
+        <div class="footer-inner">
+            <div class="footer-logo">
+                <img src="./public/assets/images/logo.jpg" alt="noi coffee">
+                <span>noi coffee</span>
             </div>
+            <p class="footer-address">〒062-0934 札幌市豊平区平岸4条1丁目6-10</p>
+            <p class="footer-copy">&copy; 2026 noi coffee. All Rights Reserved.</p>
         </div>
     </footer>
 
-    <script type="module" src="./src/main.js"></script>
+    <!-- Back to Top -->
+    <button class="back-top" id="back-top" aria-label="ページトップへ">↑</button>
+
+    <script src="./src/main.js"></script>
 </body>
+
 </html>
