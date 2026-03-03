@@ -139,3 +139,47 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
         window.scrollTo({ top, behavior: 'smooth' });
     });
 });
+
+// ── 문의 폼 (Formspree AJAX) ──────────────────────
+const contactForm = document.getElementById('contact-form');
+if (contactForm) {
+    contactForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const btn = document.getElementById('submit-btn');
+        const submitText = btn.querySelector('.submit-text');
+        const submitSending = btn.querySelector('.submit-sending');
+        const successMsg = document.getElementById('form-success');
+        const errorMsg = document.getElementById('form-error');
+
+        // 전송 중 상태
+        btn.disabled = true;
+        submitText.style.display = 'none';
+        submitSending.style.display = 'inline';
+        successMsg.style.display = 'none';
+        errorMsg.style.display = 'none';
+
+        try {
+            const res = await fetch(contactForm.action, {
+                method: 'POST',
+                body: new FormData(contactForm),
+                headers: { 'Accept': 'application/json' }
+            });
+
+            if (res.ok) {
+                // 성공
+                contactForm.reset();
+                successMsg.style.display = 'block';
+            } else {
+                // 실패
+                errorMsg.style.display = 'block';
+            }
+        } catch {
+            errorMsg.style.display = 'block';
+        } finally {
+            btn.disabled = false;
+            submitText.style.display = 'inline';
+            submitSending.style.display = 'none';
+        }
+    });
+}
