@@ -1,8 +1,8 @@
 import { defineConfig } from 'vite'
 
 export default defineConfig({
-    // GitHub Pages 저장소명에 맞춰 base 경로 설정
-    base: '/noi-coffee/',
+    // 커스텀 도메인(noicoffee.com) 사용 시 루트 경로 설정
+    base: '/',
     build: {
         outDir: 'dist',
     },
