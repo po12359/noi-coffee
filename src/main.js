@@ -1,97 +1,167 @@
 /* ============================================
-   noi coffee - main.js (완전 재설계)
+   noi coffee — Artistic Dark Edition
+   main.js
    ============================================ */
 
+// ── 커스텀 커서 ──────────────────────────────────
+const cursorRing = document.getElementById('cursor-ring');
+
+if (cursorRing && window.matchMedia('(hover: hover)').matches) {
+    let mouseX = 0, mouseY = 0;
+    let ringX = 0, ringY = 0;
+
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+    });
+
+    function animateCursor() {
+        ringX += (mouseX - ringX) * 0.12;
+        ringY += (mouseY - ringY) * 0.12;
+        cursorRing.style.left = ringX + 'px';
+        cursorRing.style.top = ringY + 'px';
+        requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
+
+    // Hover 인터랙션
+    const hoverEls = document.querySelectorAll('a, button, .gallery-item, .menu-board-item');
+    hoverEls.forEach(el => {
+        el.addEventListener('mouseenter', () => cursorRing.classList.add('hover'));
+        el.addEventListener('mouseleave', () => cursorRing.classList.remove('hover'));
+    });
+}
+
 // ── 로더 ──────────────────────────────────────────
+const loader = document.getElementById('loader');
+const loaderPct = document.getElementById('loader-pct');
+
+let pct = 0;
+const pctInterval = setInterval(() => {
+    pct = Math.min(pct + Math.floor(Math.random() * 12 + 4), 99);
+    if (loaderPct) loaderPct.textContent = pct;
+}, 80);
+
 document.addEventListener('DOMContentLoaded', function () {
     setTimeout(function () {
-        var loader = document.getElementById('loader');
-        if (loader) {
-            loader.style.opacity = '0';
-            loader.style.transition = 'opacity 0.6s ease';
-            setTimeout(function () { loader.style.display = 'none'; }, 700);
-        }
-    }, 1400);
+        clearInterval(pctInterval);
+        if (loaderPct) loaderPct.textContent = '100';
+
+        setTimeout(() => {
+            if (loader) loader.classList.add('hidden');
+            // 히어로 워드 reveals 시작
+            triggerHeroWords();
+        }, 300);
+    }, 1800);
 });
 
+// ── 히어로 타이포 애니메이션 ─────────────────────
+function triggerHeroWords() {
+    const words = document.querySelectorAll('.hero-word');
+    words.forEach((word, i) => {
+        setTimeout(() => {
+            word.classList.add('revealed');
+        }, i * 260);
+    });
+}
+
+// ── 헤더 오버레이 네비게이션 ─────────────────────
+const header = document.getElementById('header');
+const navToggle = document.getElementById('nav-toggle');
+const overlayNav = document.getElementById('overlay-nav');
+
+navToggle?.addEventListener('click', () => {
+    const isOpen = overlayNav.classList.toggle('open');
+    navToggle.classList.toggle('active', isOpen);
+    header.classList.toggle('nav-open', isOpen);
+    overlayNav.setAttribute('aria-hidden', !isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+});
+
+// 오버레이 링크 클릭시 닫기
+document.querySelectorAll('.overlay-link').forEach(link => {
+    link.addEventListener('click', () => {
+        overlayNav.classList.remove('open');
+        navToggle.classList.remove('active');
+        header.classList.remove('nav-open');
+        overlayNav.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+    });
+});
+
+// ESC 키로 닫기
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && overlayNav.classList.contains('open')) {
+        overlayNav.classList.remove('open');
+        navToggle.classList.remove('active');
+        header.classList.remove('nav-open');
+        overlayNav.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+    }
+});
 
 // ── 헤더 스크롤 ────────────────────────────────────
-const header = document.getElementById('header');
-window.addEventListener('scroll', () => {
-    header.classList.toggle('scrolled', window.scrollY > 60);
-
-    // 맨 위로 버튼
-    document.getElementById('back-top').classList.toggle('visible', window.scrollY > 400);
-}, { passive: true });
+const heroSection = document.getElementById('hero');
+function updateHeaderState() {
+    const heroH = heroSection ? heroSection.offsetHeight : 0;
+    const onHero = window.scrollY < heroH - 80;
+    header?.classList.toggle('on-hero', onHero);
+    document.getElementById('back-top')?.classList.toggle('visible', window.scrollY > 500);
+}
+window.addEventListener('scroll', updateHeaderState, { passive: true });
+updateHeaderState();
 
 document.getElementById('back-top')?.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
-// ── 모바일 드로어 ─────────────────────────────────
-const navToggle = document.getElementById('nav-toggle');
-const mobileDrawer = document.getElementById('mobile-drawer');
-
-navToggle?.addEventListener('click', () => {
-    const isOpen = mobileDrawer.classList.toggle('open');
-    navToggle.classList.toggle('active', isOpen);
-    document.body.style.overflow = isOpen ? 'hidden' : '';
-});
-
-document.querySelectorAll('.drawer-link').forEach(link => {
-    link.addEventListener('click', () => {
-        mobileDrawer.classList.remove('open');
-        navToggle.classList.remove('active');
-        document.body.style.overflow = '';
-    });
-});
-
-// ── 스크롤 reveal ─────────────────────────────────
+// ── 스크롤 Reveal ──────────────────────────────────
 const revealEls = document.querySelectorAll('.reveal');
-const observer = new IntersectionObserver(
+const revealObserver = new IntersectionObserver(
     (entries) => {
-        entries.forEach((entry, i) => {
+        entries.forEach((entry) => {
             if (entry.isIntersecting) {
-                // 순차 딜레이 적용
+                // 형제 요소 기준 순차 딜레이
                 const siblings = [...entry.target.parentElement.querySelectorAll('.reveal')];
                 const idx = siblings.indexOf(entry.target);
-                entry.target.style.transitionDelay = `${idx * 0.08}s`;
+                entry.target.style.transitionDelay = `${idx * 0.09}s`;
                 entry.target.classList.add('visible');
-                observer.unobserve(entry.target);
+                revealObserver.unobserve(entry.target);
             }
         });
     },
-    { threshold: 0.12 }
+    { threshold: 0.1, rootMargin: '0px 0px -60px 0px' }
 );
-revealEls.forEach(el => observer.observe(el));
+revealEls.forEach(el => revealObserver.observe(el));
 
 // ── 히어로 슬라이더 ──────────────────────────────
 const slides = document.querySelectorAll('.hero-slide');
-const dots = document.querySelectorAll('.hero-dot');
+const siFill = document.getElementById('si-fill');
+const siCurrent = document.getElementById('si-current');
 let current = 0;
-let timer;
+let sliderTimer;
+
+function pad(n) { return n < 10 ? '0' + n : '' + n; }
 
 function goToSlide(idx) {
     slides[current].classList.remove('active');
-    dots[current].classList.remove('active');
     current = (idx + slides.length) % slides.length;
     slides[current].classList.add('active');
-    dots[current].classList.add('active');
+
+    // 인디케이터 업데이트
+    if (siCurrent) siCurrent.textContent = pad(current + 1);
+    if (siFill) siFill.style.width = `${((current + 1) / slides.length) * 100}%`;
 }
 
 function startSlider() {
-    timer = setInterval(() => goToSlide(current + 1), 5000);
+    sliderTimer = setInterval(() => goToSlide(current + 1), 5500);
 }
 
-dots.forEach(dot => {
-    dot.addEventListener('click', () => {
-        clearInterval(timer);
-        goToSlide(parseInt(dot.dataset.index));
-        startSlider();
-    });
-});
-
-if (slides.length > 0) startSlider();
+if (slides.length > 0) {
+    startSlider();
+    // 초기 fill
+    if (siFill) siFill.style.width = `${(1 / slides.length) * 100}%`;
+}
 
 // ── 갤러리 라이트박스 ─────────────────────────────
 const galleryItems = [...document.querySelectorAll('.gallery-item img')];
@@ -105,36 +175,45 @@ function openLightbox(idx) {
     lightbox.classList.add('open');
     document.body.style.overflow = 'hidden';
 }
+
 function closeLightbox() {
     lightbox.classList.remove('open');
     document.body.style.overflow = '';
 }
-function prevLb() { currentLb = (currentLb - 1 + galleryItems.length) % galleryItems.length; lbImg.src = galleryItems[currentLb].src; }
-function nextLb() { currentLb = (currentLb + 1) % galleryItems.length; lbImg.src = galleryItems[currentLb].src; }
+
+function prevLb() {
+    currentLb = (currentLb - 1 + galleryItems.length) % galleryItems.length;
+    lbImg.src = galleryItems[currentLb].src;
+}
+
+function nextLb() {
+    currentLb = (currentLb + 1) % galleryItems.length;
+    lbImg.src = galleryItems[currentLb].src;
+}
 
 galleryItems.forEach((img, i) => {
     img.parentElement.addEventListener('click', () => openLightbox(i));
 });
+
 document.getElementById('lightbox-close')?.addEventListener('click', closeLightbox);
 document.getElementById('lightbox-prev')?.addEventListener('click', prevLb);
 document.getElementById('lightbox-next')?.addEventListener('click', nextLb);
 lightbox?.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
 
-// 키보드 라이트박스 조작
 document.addEventListener('keydown', e => {
-    if (!lightbox.classList.contains('open')) return;
+    if (!lightbox?.classList.contains('open')) return;
     if (e.key === 'Escape') closeLightbox();
     if (e.key === 'ArrowLeft') prevLb();
     if (e.key === 'ArrowRight') nextLb();
 });
 
-// ── 네비게이션 스무스 스크롤 ─────────────────────
+// ── 스무스 스크롤 ─────────────────────────────────
 document.querySelectorAll('a[href^="#"]').forEach(link => {
     link.addEventListener('click', e => {
         const target = document.querySelector(link.getAttribute('href'));
         if (!target) return;
         e.preventDefault();
-        const offset = header.offsetHeight + 20;
+        const offset = header.offsetHeight + 16;
         const top = target.getBoundingClientRect().top + window.scrollY - offset;
         window.scrollTo({ top, behavior: 'smooth' });
     });
@@ -152,7 +231,6 @@ if (contactForm) {
         const successMsg = document.getElementById('form-success');
         const errorMsg = document.getElementById('form-error');
 
-        // 전송 중 상태
         btn.disabled = true;
         submitText.style.display = 'none';
         submitSending.style.display = 'inline';
@@ -167,11 +245,9 @@ if (contactForm) {
             });
 
             if (res.ok) {
-                // 성공
                 contactForm.reset();
                 successMsg.style.display = 'block';
             } else {
-                // 실패
                 errorMsg.style.display = 'block';
             }
         } catch {

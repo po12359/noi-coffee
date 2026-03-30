@@ -24,10 +24,11 @@
     <meta name="twitter:title" content="noi coffee | 札幌・平岸 コーヒースタンド">
     <meta name="twitter:description" content="noi coffee（ノイコーヒー）は、札幌・平岸の静かな住宅街に生まれた韓国スタイルのコーヒースタンドです。">
     <meta name="twitter:image" content="https://noi-coffee.com/assets/images/1769165117048.webp">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Serif+JP:wght@200;300;400&family=Outfit:wght@300;400;500&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@700;800&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Serif+JP:wght@200;300;400&family=Outfit:wght@300;400;500&display=swap"
         rel="stylesheet">
     <link rel="shortcut icon" href="/favicon.ico">
     <link rel="icon" href="/favicon.webp" type="image/webp" sizes="512x512">
@@ -38,13 +39,17 @@
 </head>
 
 <body>
+    <!-- Custom Cursor -->
+    <div class="cursor-ring" id="cursor-ring"></div>
+
     <!-- ====== LOADER ====== -->
     <div class="loader" id="loader">
         <div class="loader-inner">
-            <img src="/assets/images/logo-transparent.webp" alt="noi coffee" class="loader-logo">
+            <div class="loader-brand">NOI COFFEE</div>
             <div class="loader-bar">
                 <div class="loader-fill"></div>
             </div>
+            <div class="loader-pct" id="loader-pct">0</div>
         </div>
     </div>
 
@@ -55,79 +60,104 @@
                 <img src="/assets/images/logo-transparent.webp" alt="noi coffee">
                 <span>noi coffee</span>
             </a>
-            <nav class="nav" id="nav">
-                <ul>
-                    <li><a href="#about" class="nav-link">About</a></li>
-                    <li><a href="#menu" class="nav-link">Menu</a></li>
-                    <li><a href="#gallery" class="nav-link">Gallery</a></li>
-                    <li><a href="#access" class="nav-link">Access</a></li>
-                    <li><a href="#contact" class="nav-link">Contact</a></li>
-                </ul>
-            </nav>
             <button class="nav-toggle" id="nav-toggle" aria-label="メニュー">
-                <span></span><span></span><span></span>
+                <span class="bar bar-top"></span>
+                <span class="bar bar-mid"></span>
             </button>
         </div>
-        <!-- Mobile Drawer -->
-        <div class="mobile-drawer" id="mobile-drawer">
-            <ul>
-                <li><a href="#about" class="drawer-link">About</a></li>
-                <li><a href="#menu" class="drawer-link">Menu</a></li>
-                <li><a href="#gallery" class="drawer-link">Gallery</a></li>
-                <li><a href="#access" class="drawer-link">Access</a></li>
-                <li><a href="#contact" class="drawer-link">Contact</a></li>
-                <li class="drawer-sns">
-                    <a href="https://www.instagram.com/noi.coffee05/" target="_blank" rel="noopener">Instagram →</a>
-                </li>
-            </ul>
-        </div>
     </header>
+
+    <!-- ====== OVERLAY NAV ====== -->
+    <nav class="overlay-nav" id="overlay-nav" aria-hidden="true">
+        <div class="overlay-nav-bg"></div>
+        <div class="overlay-nav-inner">
+            <ul class="overlay-links">
+                <li><a href="#about" class="overlay-link"><span class="ol-num">01</span><span class="ol-text">About</span></a></li>
+                <li><a href="#menu" class="overlay-link"><span class="ol-num">02</span><span class="ol-text">Menu</span></a></li>
+                <li><a href="#gallery" class="overlay-link"><span class="ol-num">03</span><span class="ol-text">Gallery</span></a></li>
+                <li><a href="#access" class="overlay-link"><span class="ol-num">04</span><span class="ol-text">Access</span></a></li>
+                <li><a href="#contact" class="overlay-link"><span class="ol-num">05</span><span class="ol-text">Contact</span></a></li>
+            </ul>
+            <div class="overlay-footer">
+                <a href="https://www.instagram.com/noi.coffee05/" target="_blank" rel="noopener">@noi.coffee05</a>
+                <span>SAPPORO · HIRAGISHI · 2026</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ====== MARQUEE ====== -->
+    <div class="marquee-bar" aria-hidden="true">
+        <div class="marquee-track">
+            <span>NOI COFFEE</span><span class="marquee-sep">—</span>
+            <span>SAPPORO · HIRAGISHI</span><span class="marquee-sep">—</span>
+            <span>CREAM LATTE</span><span class="marquee-sep">—</span>
+            <span>KOREAN STYLE COFFEE</span><span class="marquee-sep">—</span>
+            <span>TAKEOUT ONLY</span><span class="marquee-sep">—</span>
+            <span>OPEN 2026</span><span class="marquee-sep">—</span>
+            <span>NOI COFFEE</span><span class="marquee-sep">—</span>
+            <span>SAPPORO · HIRAGISHI</span><span class="marquee-sep">—</span>
+            <span>CREAM LATTE</span><span class="marquee-sep">—</span>
+            <span>KOREAN STYLE COFFEE</span><span class="marquee-sep">—</span>
+            <span>TAKEOUT ONLY</span><span class="marquee-sep">—</span>
+            <span>OPEN 2026</span><span class="marquee-sep">—</span>
+        </div>
+    </div>
 
     <main>
         <!-- ====== HERO ====== -->
         <section class="hero" id="hero">
             <div class="hero-slider" id="hero-slider">
                 <div class="hero-slide active" style="background-image: url('/assets/images/1769165117048.webp')"></div>
-                <div class="hero-slide" style="background-image: url('/assets/images/20260202_100739.webp')">
-                </div>
-                <div class="hero-slide" style="background-image: url('/assets/images/20260212_144506.webp')">
-                </div>
+                <div class="hero-slide" style="background-image: url('/assets/images/20260202_100739.webp')"></div>
+                <div class="hero-slide" style="background-image: url('/assets/images/20260212_144506.webp')"></div>
             </div>
             <div class="hero-overlay"></div>
+
             <div class="hero-content">
-                <p class="hero-sub reveal">SAPPORO · HIRAGISHI</p>
-                <h1 class="hero-title reveal">
-                    <span>小さな休息を、</span>
-                    <span>ここで。</span>
+                <p class="hero-location">
+                    <span>SAPPORO</span>
+                    <em>·</em>
+                    <span>HIRAGISHI</span>
+                </p>
+                <h1 class="hero-title">
+                    <span class="hero-line"><span class="hero-word">小さな</span></span>
+                    <span class="hero-line"><span class="hero-word">休息を、</span></span>
+                    <span class="hero-line italic"><span class="hero-word">ここで。</span></span>
                 </h1>
-                <p class="hero-desc reveal">noi coffee</p>
             </div>
-            <div class="hero-scroll-hint">
-                <span>Scroll</span>
+
+            <div class="hero-bottom">
+                <div class="hero-brand-txt">noi coffee</div>
+                <div class="hero-slide-indicator">
+                    <span class="si-current" id="si-current">01</span>
+                    <span class="si-bar"><span class="si-fill" id="si-fill"></span></span>
+                    <span class="si-total">03</span>
+                </div>
+            </div>
+
+            <div class="hero-scroll">
+                <span>SCROLL</span>
                 <div class="scroll-line"></div>
-            </div>
-            <div class="hero-dots" id="hero-dots">
-                <button class="hero-dot active" data-index="0"></button>
-                <button class="hero-dot" data-index="1"></button>
-                <button class="hero-dot" data-index="2"></button>
             </div>
         </section>
 
         <!-- ====== ABOUT ====== -->
         <section class="section about" id="about">
+            <div class="section-intro">
+                <span class="section-num reveal">01</span>
+                <span class="section-label reveal">Our Story</span>
+            </div>
+            <div class="section-display reveal">COFFEE STAND</div>
             <div class="about-grid">
                 <div class="about-images">
                     <div class="about-img-main reveal">
-                        <img src="/assets/images/20260116_122617.webp" alt="店内の様子" loading="lazy" width="800"
-                            height="600">
+                        <img src="/assets/images/20260116_122617.webp" alt="店内の様子" loading="lazy" width="800" height="600">
                     </div>
                     <div class="about-img-sub reveal">
-                        <img src="/assets/images/20260105_130401.webp" alt="コーヒー" loading="lazy" width="800"
-                            height="600">
+                        <img src="/assets/images/20260105_130401.webp" alt="コーヒー" loading="lazy" width="800" height="600">
                     </div>
                 </div>
                 <div class="about-text">
-                    <p class="section-label reveal">Our Story</p>
                     <h2 class="section-title reveal">日常に溶け込む<br>ひとときの休息</h2>
                     <div class="divider reveal"></div>
                     <p class="about-body reveal">
@@ -140,10 +170,19 @@
                         シグネチャークリームラテで、<br>
                         あなたの日常にそっと寄り添います。
                     </p>
-                    <div class="about-badges reveal">
-                        <span>Takeout Only</span>
-                        <span>2026 Open</span>
-                        <span>Hiragishi</span>
+                    <div class="about-stats reveal">
+                        <div class="stat-item">
+                            <span class="stat-num">2026</span>
+                            <span class="stat-lab">Open</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-num">10+</span>
+                            <span class="stat-lab">Menu</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-num">100%</span>
+                            <span class="stat-lab">Handcrafted</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -151,18 +190,20 @@
 
         <!-- ====== MENU ====== -->
         <section class="section menu" id="menu">
+            <div class="section-intro">
+                <span class="section-num reveal">02</span>
+                <span class="section-label reveal">Signature</span>
+            </div>
+            <div class="section-display reveal">MENU</div>
             <div class="container">
-                <p class="section-label text-center reveal">Signature</p>
-                <h2 class="section-title text-center reveal">Menu</h2>
+                <h2 class="section-title text-center reveal">Signature Drinks</h2>
                 <div class="divider centered reveal"></div>
                 <div class="menu-board-grid">
                     <div class="menu-board-item reveal">
-                        <img src="/assets/images/menu-board.webp" alt="noi coffee メニュー" loading="lazy" width="800"
-                            height="1000">
+                        <img src="/assets/images/menu-board.webp" alt="noi coffee メニュー" loading="lazy" width="800" height="1000">
                     </div>
                     <div class="menu-board-item reveal">
-                        <img src="/assets/images/menu-creamilatte.webp" alt="Cream Latte メニュー" loading="lazy"
-                            width="800" height="1000">
+                        <img src="/assets/images/menu-creamilatte.webp" alt="Cream Latte メニュー" loading="lazy" width="800" height="1000">
                     </div>
                 </div>
                 <p class="menu-note reveal">※ 豆は札幌のロースタリーより厳選仕入れのため、ご提供内容が変更となる場合があります。<br>最新情報は<a
@@ -172,44 +213,31 @@
 
         <!-- ====== GALLERY ====== -->
         <section class="section gallery" id="gallery">
+            <div class="section-intro">
+                <span class="section-num reveal">03</span>
+                <span class="section-label reveal">Moments</span>
+            </div>
+            <div class="section-display reveal">GALLERY</div>
             <div class="container">
-                <p class="section-label text-center reveal">Moments</p>
-                <h2 class="section-title text-center reveal">Gallery</h2>
                 <div class="divider centered reveal"></div>
             </div>
             <div class="gallery-masonry">
-                <div class="gallery-item reveal"><img src="/assets/images/20260105_130812.webp" alt="" loading="lazy">
-                </div>
-                <div class="gallery-item reveal"><img src="/assets/images/20260108_110104.webp" alt="" loading="lazy">
-                </div>
-                <div class="gallery-item reveal"><img src="/assets/images/20260114_110418.webp" alt="" loading="lazy">
-                </div>
-                <div class="gallery-item reveal"><img src="/assets/images/20260114_132220.webp" alt="" loading="lazy">
-                </div>
-                <div class="gallery-item reveal"><img src="/assets/images/20260115_141321.webp" alt="" loading="lazy">
-                </div>
-                <div class="gallery-item reveal"><img src="/assets/images/20260116_121508.webp" alt="" loading="lazy">
-                </div>
-                <div class="gallery-item reveal"><img src="/assets/images/20260116_121520.webp" alt="" loading="lazy">
-                </div>
-                <div class="gallery-item reveal"><img src="/assets/images/20260127_130448.webp" alt="" loading="lazy">
-                </div>
-                <div class="gallery-item reveal"><img src="/assets/images/20260204_163743.webp" alt="" loading="lazy">
-                </div>
-                <div class="gallery-item reveal"><img src="/assets/images/20260204_164050.webp" alt="" loading="lazy">
-                </div>
-                <div class="gallery-item reveal"><img src="/assets/images/20260204_164054.webp" alt="" loading="lazy">
-                </div>
-                <div class="gallery-item reveal"><img src="/assets/images/20260302_095625.webp" alt="" loading="lazy">
-                </div>
-                <div class="gallery-item reveal"><img src="/assets/images/20260303_092312.webp" alt="" loading="lazy">
-                </div>
-                <div class="gallery-item reveal"><img src="/assets/images/IMG20260107170754_01.webp" alt=""
-                        loading="lazy"></div>
-                <div class="gallery-item reveal"><img src="/assets/images/IMG20260107170819.webp" alt="" loading="lazy">
-                </div>
-                <div class="gallery-item reveal"><img src="/assets/images/IMG20260107171927.webp" alt="" loading="lazy">
-                </div>
+                <div class="gallery-item reveal"><img src="/assets/images/20260105_130812.webp" alt="" loading="lazy"></div>
+                <div class="gallery-item reveal"><img src="/assets/images/20260108_110104.webp" alt="" loading="lazy"></div>
+                <div class="gallery-item reveal"><img src="/assets/images/20260114_110418.webp" alt="" loading="lazy"></div>
+                <div class="gallery-item reveal"><img src="/assets/images/20260114_132220.webp" alt="" loading="lazy"></div>
+                <div class="gallery-item reveal"><img src="/assets/images/20260115_141321.webp" alt="" loading="lazy"></div>
+                <div class="gallery-item reveal"><img src="/assets/images/20260116_121508.webp" alt="" loading="lazy"></div>
+                <div class="gallery-item reveal"><img src="/assets/images/20260116_121520.webp" alt="" loading="lazy"></div>
+                <div class="gallery-item reveal"><img src="/assets/images/20260127_130448.webp" alt="" loading="lazy"></div>
+                <div class="gallery-item reveal"><img src="/assets/images/20260204_163743.webp" alt="" loading="lazy"></div>
+                <div class="gallery-item reveal"><img src="/assets/images/20260204_164050.webp" alt="" loading="lazy"></div>
+                <div class="gallery-item reveal"><img src="/assets/images/20260204_164054.webp" alt="" loading="lazy"></div>
+                <div class="gallery-item reveal"><img src="/assets/images/20260302_095625.webp" alt="" loading="lazy"></div>
+                <div class="gallery-item reveal"><img src="/assets/images/20260303_092312.webp" alt="" loading="lazy"></div>
+                <div class="gallery-item reveal"><img src="/assets/images/IMG20260107170754_01.webp" alt="" loading="lazy"></div>
+                <div class="gallery-item reveal"><img src="/assets/images/IMG20260107170819.webp" alt="" loading="lazy"></div>
+                <div class="gallery-item reveal"><img src="/assets/images/IMG20260107171927.webp" alt="" loading="lazy"></div>
             </div>
             <!-- Lightbox -->
             <div class="lightbox" id="lightbox">
@@ -222,9 +250,13 @@
 
         <!-- ====== ACCESS ====== -->
         <section class="section access" id="access">
+            <div class="section-intro">
+                <span class="section-num reveal">04</span>
+                <span class="section-label reveal">Find Us</span>
+            </div>
+            <div class="section-display reveal">FIND US</div>
             <div class="access-grid">
                 <div class="access-map reveal">
-                    <!-- 지도를 클릭하면 구글맵 경로 안내로 이동 -->
                     <a class="map-link-overlay"
                         href="https://www.google.com/maps/dir/?api=1&destination=札幌市豊平区平岸4条1丁目6-10&travelmode=transit"
                         target="_blank" rel="noopener" title="Google Mapsで経路を確認する">
@@ -242,7 +274,6 @@
                     </iframe>
                 </div>
                 <div class="access-info">
-                    <p class="section-label reveal">Find Us</p>
                     <h2 class="section-title reveal">Access</h2>
                     <div class="divider reveal"></div>
                     <dl class="access-details reveal">
@@ -270,8 +301,7 @@
                         </div>
                     </dl>
                     <div class="access-sns reveal">
-                        <a href="https://www.instagram.com/noi.coffee05/" target="_blank" rel="noopener"
-                            class="sns-btn">
+                        <a href="https://www.instagram.com/noi.coffee05/" target="_blank" rel="noopener" class="sns-btn">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                                 <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
                                 <circle cx="12" cy="12" r="4" />
@@ -279,8 +309,7 @@
                             </svg>
                             @noi.coffee05
                         </a>
-                        <a href="https://tabelog.com/hokkaido/A0101/A010303/1083597/" target="_blank" rel="noopener"
-                            class="sns-btn">
+                        <a href="https://tabelog.com/hokkaido/A0101/A010303/1083597/" target="_blank" rel="noopener" class="sns-btn">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                                 <path d="M12 2L2 7l10 5 10-5-10-5z" />
                                 <path d="M2 17l10 5 10-5" />
@@ -295,15 +324,17 @@
 
         <!-- ====== CONTACT ====== -->
         <section class="section contact" id="contact">
+            <div class="section-intro">
+                <span class="section-num reveal">05</span>
+                <span class="section-label reveal">Get In Touch</span>
+            </div>
+            <div class="section-display reveal">CONTACT</div>
             <div class="container">
-                <p class="section-label text-center reveal">Get In Touch</p>
-                <h2 class="section-title text-center reveal">Contact</h2>
+                <h2 class="section-title text-center reveal">Get In Touch</h2>
                 <div class="divider centered reveal"></div>
                 <p class="contact-desc reveal">投資・直営店・採用に関するお問い合わせは<br>下記フォームよりお気軽にどうぞ。</p>
 
-                <form class="contact-form reveal" id="contact-form" action="https://formspree.io/f/maqdgkvv"
-                    method="POST">
-
+                <form class="contact-form reveal" id="contact-form" action="https://formspree.io/f/maqdgkvv" method="POST">
                     <div class="form-row">
                         <div class="form-group">
                             <label for="contact-name">お名前 *</label>
@@ -311,11 +342,9 @@
                         </div>
                         <div class="form-group">
                             <label for="contact-email">メールアドレス *</label>
-                            <input type="email" id="contact-email" name="email" required
-                                placeholder="example@email.com">
+                            <input type="email" id="contact-email" name="email" required placeholder="example@email.com">
                         </div>
                     </div>
-
                     <div class="form-group">
                         <label for="contact-type">お問い合わせ種別 *</label>
                         <select id="contact-type" name="type" required>
@@ -326,24 +355,19 @@
                             <option value="その他">기타 / その他</option>
                         </select>
                     </div>
-
                     <div class="form-group">
                         <label for="contact-message">メッセージ *</label>
                         <textarea id="contact-message" name="message" rows="6" required
                             placeholder="お問い合わせ内容をご記入ください。"></textarea>
                     </div>
-
-                    <!-- Formspree 스팸 방지 -->
                     <input type="hidden" name="_subject" value="[noi coffee] お問い合わせ">
                     <input type="text" name="_gotcha" style="display:none">
-
                     <div class="form-submit">
                         <button type="submit" class="submit-btn" id="submit-btn">
                             <span class="submit-text">送信する</span>
                             <span class="submit-sending" style="display:none">送信中…</span>
                         </button>
                     </div>
-
                     <div class="form-success" id="form-success" style="display:none">
                         <p>✓ お問い合わせを受け付けました。<br>내용을 확인 후 연락드리겠습니다。</p>
                     </div>
@@ -357,6 +381,18 @@
 
     <!-- ====== FOOTER ====== -->
     <footer class="footer">
+        <div class="footer-marquee" aria-hidden="true">
+            <div class="marquee-track">
+                <span>NOI COFFEE</span><span class="marquee-sep">·</span>
+                <span>SAPPORO</span><span class="marquee-sep">·</span>
+                <span>HIRAGISHI</span><span class="marquee-sep">·</span>
+                <span>CREAM LATTE</span><span class="marquee-sep">·</span>
+                <span>NOI COFFEE</span><span class="marquee-sep">·</span>
+                <span>SAPPORO</span><span class="marquee-sep">·</span>
+                <span>HIRAGISHI</span><span class="marquee-sep">·</span>
+                <span>CREAM LATTE</span><span class="marquee-sep">·</span>
+            </div>
+        </div>
         <div class="footer-inner">
             <div class="footer-logo">
                 <img src="/assets/images/logo-transparent.webp" alt="noi coffee">
