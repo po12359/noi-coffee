@@ -25,7 +25,7 @@ if (cursorRing && window.matchMedia('(hover: hover)').matches) {
     animateCursor();
 
     // Hover 인터랙션
-    const hoverEls = document.querySelectorAll('a, button, .gallery-item, .menu-board-item');
+    const hoverEls = document.querySelectorAll('a, button, .carousel-slide, .carousel-btn, .menu-board-item');
     hoverEls.forEach(el => {
         el.addEventListener('mouseenter', () => cursorRing.classList.add('hover'));
         el.addEventListener('mouseleave', () => cursorRing.classList.remove('hover'));
@@ -163,49 +163,99 @@ if (slides.length > 0) {
     if (siFill) siFill.style.width = `${(1 / slides.length) * 100}%`;
 }
 
-// ── 갤러리 라이트박스 ─────────────────────────────
-const galleryItems = [...document.querySelectorAll('.gallery-item img')];
-const lightbox = document.getElementById('lightbox');
-const lbImg = document.getElementById('lightbox-img');
-let currentLb = 0;
+// ── 갤러리 3D 캐러셀 ──────────────────────────────
+(function () {
+    const stage = document.getElementById('carousel-stage');
+    if (!stage) return;
 
-function openLightbox(idx) {
-    currentLb = idx;
-    lbImg.src = galleryItems[idx].src;
-    lightbox.classList.add('open');
-    document.body.style.overflow = 'hidden';
-}
+    const slides = [...stage.querySelectorAll('.carousel-slide')];
+    const total = slides.length;
+    const prevBtn = document.getElementById('carousel-prev');
+    const nextBtn = document.getElementById('carousel-next');
+    const cCur = document.getElementById('c-cur');
+    const progressFill = document.getElementById('carousel-progress-fill');
 
-function closeLightbox() {
-    lightbox.classList.remove('open');
-    document.body.style.overflow = '';
-}
+    let current = 0;
+    let isAnimating = false;
 
-function prevLb() {
-    currentLb = (currentLb - 1 + galleryItems.length) % galleryItems.length;
-    lbImg.src = galleryItems[currentLb].src;
-}
+    function pad(n) { return n < 10 ? '0' + n : String(n); }
 
-function nextLb() {
-    currentLb = (currentLb + 1) % galleryItems.length;
-    lbImg.src = galleryItems[currentLb].src;
-}
+    function updateCarousel(newIdx) {
+        if (isAnimating) return;
+        isAnimating = true;
 
-galleryItems.forEach((img, i) => {
-    img.parentElement.addEventListener('click', () => openLightbox(i));
-});
+        current = ((newIdx % total) + total) % total;
 
-document.getElementById('lightbox-close')?.addEventListener('click', closeLightbox);
-document.getElementById('lightbox-prev')?.addEventListener('click', prevLb);
-document.getElementById('lightbox-next')?.addEventListener('click', nextLb);
-lightbox?.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+        slides.forEach((slide, i) => {
+            // 현재 슬라이드 기준 상대 위치 계산
+            let rel = i - current;
+            // 원형으로 감싸기 — 가장 짧은 거리로
+            if (rel > total / 2)  rel -= total;
+            if (rel < -total / 2) rel += total;
 
-document.addEventListener('keydown', e => {
-    if (!lightbox?.classList.contains('open')) return;
-    if (e.key === 'Escape') closeLightbox();
-    if (e.key === 'ArrowLeft') prevLb();
-    if (e.key === 'ArrowRight') nextLb();
-});
+            slide.className = 'carousel-slide';
+            if      (rel ===  0) slide.classList.add('is-active');
+            else if (rel ===  1) slide.classList.add('is-next-1');
+            else if (rel === -1) slide.classList.add('is-prev-1');
+            else if (rel ===  2) slide.classList.add('is-next-2');
+            else if (rel === -2) slide.classList.add('is-prev-2');
+            else                 slide.classList.add('is-hidden');
+        });
+
+        if (cCur) cCur.textContent = pad(current + 1);
+        if (progressFill) {
+            progressFill.style.width = `${((current + 1) / total) * 100}%`;
+        }
+
+        setTimeout(() => { isAnimating = false; }, 800);
+    }
+
+    // 버튼
+    prevBtn?.addEventListener('click', () => updateCarousel(current - 1));
+    nextBtn?.addEventListener('click', () => updateCarousel(current + 1));
+
+    // 키보드 (갤러리 섹션 근처에서만)
+    document.addEventListener('keydown', (e) => {
+        const sec = document.getElementById('gallery');
+        if (!sec) return;
+        const r = sec.getBoundingClientRect();
+        if (r.top > window.innerHeight || r.bottom < 0) return;
+        if (e.key === 'ArrowLeft')  updateCarousel(current - 1);
+        if (e.key === 'ArrowRight') updateCarousel(current + 1);
+    });
+
+    // 터치 스와이프
+    let touchStartX = 0;
+    stage.addEventListener('touchstart', (e) => {
+        touchStartX = e.touches[0].clientX;
+    }, { passive: true });
+    stage.addEventListener('touchend', (e) => {
+        const dx = e.changedTouches[0].clientX - touchStartX;
+        if (Math.abs(dx) > 48) {
+            dx < 0 ? updateCarousel(current + 1) : updateCarousel(current - 1);
+        }
+    });
+
+    // 마우스 드래그
+    let dragStartX = 0;
+    let isDragging = false;
+    stage.addEventListener('mousedown', (e) => {
+        dragStartX = e.clientX;
+        isDragging = true;
+    });
+    stage.addEventListener('mouseup', (e) => {
+        if (!isDragging) return;
+        isDragging = false;
+        const dx = e.clientX - dragStartX;
+        if (Math.abs(dx) > 60) {
+            dx < 0 ? updateCarousel(current + 1) : updateCarousel(current - 1);
+        }
+    });
+    stage.addEventListener('mouseleave', () => { isDragging = false; });
+
+    // 초기화
+    updateCarousel(0);
+})();
 
 // ── 스무스 스크롤 ─────────────────────────────────
 document.querySelectorAll('a[href^="#"]').forEach(link => {

@@ -221,30 +221,48 @@
             <div class="container">
                 <div class="divider centered reveal"></div>
             </div>
-            <div class="gallery-masonry">
-                <div class="gallery-item reveal"><img src="/assets/images/20260105_130812.webp" alt="" loading="lazy"></div>
-                <div class="gallery-item reveal"><img src="/assets/images/20260108_110104.webp" alt="" loading="lazy"></div>
-                <div class="gallery-item reveal"><img src="/assets/images/20260114_110418.webp" alt="" loading="lazy"></div>
-                <div class="gallery-item reveal"><img src="/assets/images/20260114_132220.webp" alt="" loading="lazy"></div>
-                <div class="gallery-item reveal"><img src="/assets/images/20260115_141321.webp" alt="" loading="lazy"></div>
-                <div class="gallery-item reveal"><img src="/assets/images/20260116_121508.webp" alt="" loading="lazy"></div>
-                <div class="gallery-item reveal"><img src="/assets/images/20260116_121520.webp" alt="" loading="lazy"></div>
-                <div class="gallery-item reveal"><img src="/assets/images/20260127_130448.webp" alt="" loading="lazy"></div>
-                <div class="gallery-item reveal"><img src="/assets/images/20260204_163743.webp" alt="" loading="lazy"></div>
-                <div class="gallery-item reveal"><img src="/assets/images/20260204_164050.webp" alt="" loading="lazy"></div>
-                <div class="gallery-item reveal"><img src="/assets/images/20260204_164054.webp" alt="" loading="lazy"></div>
-                <div class="gallery-item reveal"><img src="/assets/images/20260302_095625.webp" alt="" loading="lazy"></div>
-                <div class="gallery-item reveal"><img src="/assets/images/20260303_092312.webp" alt="" loading="lazy"></div>
-                <div class="gallery-item reveal"><img src="/assets/images/IMG20260107170754_01.webp" alt="" loading="lazy"></div>
-                <div class="gallery-item reveal"><img src="/assets/images/IMG20260107170819.webp" alt="" loading="lazy"></div>
-                <div class="gallery-item reveal"><img src="/assets/images/IMG20260107171927.webp" alt="" loading="lazy"></div>
-            </div>
-            <!-- Lightbox -->
-            <div class="lightbox" id="lightbox">
-                <button class="lightbox-close" id="lightbox-close">✕</button>
-                <button class="lightbox-prev" id="lightbox-prev">&#8249;</button>
-                <button class="lightbox-next" id="lightbox-next">&#8250;</button>
-                <div class="lightbox-img-wrap"><img src="" alt="" id="lightbox-img"></div>
+
+            <div class="gallery-carousel-wrap">
+                <div class="carousel-stage" id="carousel-stage">
+                    <div class="carousel-slide" data-idx="0"><img src="/assets/images/20260105_130812.webp" alt="" loading="lazy" draggable="false"></div>
+                    <div class="carousel-slide" data-idx="1"><img src="/assets/images/20260108_110104.webp" alt="" loading="lazy" draggable="false"></div>
+                    <div class="carousel-slide" data-idx="2"><img src="/assets/images/20260114_110418.webp" alt="" loading="lazy" draggable="false"></div>
+                    <div class="carousel-slide" data-idx="3"><img src="/assets/images/20260114_132220.webp" alt="" loading="lazy" draggable="false"></div>
+                    <div class="carousel-slide" data-idx="4"><img src="/assets/images/20260115_141321.webp" alt="" loading="lazy" draggable="false"></div>
+                    <div class="carousel-slide" data-idx="5"><img src="/assets/images/20260116_121508.webp" alt="" loading="lazy" draggable="false"></div>
+                    <div class="carousel-slide" data-idx="6"><img src="/assets/images/20260116_121520.webp" alt="" loading="lazy" draggable="false"></div>
+                    <div class="carousel-slide" data-idx="7"><img src="/assets/images/20260127_130448.webp" alt="" loading="lazy" draggable="false"></div>
+                    <div class="carousel-slide" data-idx="8"><img src="/assets/images/20260204_163743.webp" alt="" loading="lazy" draggable="false"></div>
+                    <div class="carousel-slide" data-idx="9"><img src="/assets/images/20260204_164050.webp" alt="" loading="lazy" draggable="false"></div>
+                    <div class="carousel-slide" data-idx="10"><img src="/assets/images/20260204_164054.webp" alt="" loading="lazy" draggable="false"></div>
+                    <div class="carousel-slide" data-idx="11"><img src="/assets/images/20260302_095625.webp" alt="" loading="lazy" draggable="false"></div>
+                    <div class="carousel-slide" data-idx="12"><img src="/assets/images/20260303_092312.webp" alt="" loading="lazy" draggable="false"></div>
+                    <div class="carousel-slide" data-idx="13"><img src="/assets/images/IMG20260107170754_01.webp" alt="" loading="lazy" draggable="false"></div>
+                    <div class="carousel-slide" data-idx="14"><img src="/assets/images/IMG20260107170819.webp" alt="" loading="lazy" draggable="false"></div>
+                    <div class="carousel-slide" data-idx="15"><img src="/assets/images/IMG20260107171927.webp" alt="" loading="lazy" draggable="false"></div>
+                </div>
+
+                <div class="carousel-controls">
+                    <button class="carousel-btn" id="carousel-prev" aria-label="이전 사진">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="15 18 9 12 15 6"/>
+                        </svg>
+                    </button>
+                    <div class="carousel-counter">
+                        <span class="c-cur" id="c-cur">01</span>
+                        <span class="c-sep">&thinsp;/&thinsp;</span>
+                        <span class="c-total">16</span>
+                    </div>
+                    <button class="carousel-btn" id="carousel-next" aria-label="다음 사진">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="9 18 15 12 9 6"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="carousel-progress">
+                    <div class="carousel-progress-fill" id="carousel-progress-fill"></div>
+                </div>
             </div>
         </section>
 
